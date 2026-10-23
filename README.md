@@ -13,6 +13,15 @@ are obtained by tensor-network contraction of the gate environment. Two approach
   model, fSim for the XXZ Heisenberg model) optimized through their angles with Adam (chain rule on the
   gate-matrix gradient); single-qubit gates are optimized with Riemannian Adam.
 
+<p align="center">
+  <img src="docs/weyl_chamber.svg" alt="Weyl chamber" width="520">
+</p>
+
+*Weyl chamber $\pi/4 \ge \alpha_x \ge \alpha_y \ge \alpha_z \ge 0$ of two-qubit gates up to local
+equivalence. The native gate families used here are highlighted: $R_{ZZ}(\theta)$ lies on the
+I–CNOT edge (orange), and $\mathrm{fSim}(\theta,\phi)$ covers the face $\alpha_x = \alpha_y$
+(I–iSWAP–SWAP, teal).*
+
 ## Installation
 
 The environment used for the paper results is given in `requirements.txt` (Python 3.12, CPU):
