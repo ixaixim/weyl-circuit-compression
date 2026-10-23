@@ -1,0 +1,13 @@
+# Environment used for the paper results (Python 3.12, CPU).
+# For NVIDIA GPUs, additionally install jax[cuda12]==0.10.0.
+jax==0.10.0
+jaxlib==0.10.0
+ml_dtypes==0.5.3
+opt_einsum==3.4.0
+numpy==2.3.4
+scipy==1.16.3
+qiskit==2.2.2
+matplotlib==3.10.7
+PyYAML==6.0.3
+pytest==8.4.2
+ipykernel==7.1.0

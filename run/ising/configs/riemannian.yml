@@ -1,0 +1,20 @@
+# Riemannian optimization (RO), Ising model.
+# Quick example: N = 10, a few minutes on a CPU.
+# H = sum_i [Jz Z_i Z_{i+1} + hx X_i + hz Z_i]   (paper notation: J = Jz, h = hx, g = hz)
+model: ising
+method: riemannian
+n_sites: 10
+t: 2.0
+hamiltonian: {Jx: 0.0, Jy: 0.0, Jz: 1.0, hx: 0.75, hy: 0.0, hz: 0.6}
+# Fourth-order Suzuki-Trotter reference; err_threshold is only used if compress is true.
+reference: {reps: 20, order: 4, max_bond_dim: 64, compress: false, err_threshold: 1.0e-10}
+ansatz: {reps: 4, order: 2}   # second-order Trotter initialization; override with --reps
+optimizer:
+  lr: 1.0e-4
+  betas: [0.9, 0.999]
+  eps: 1.0e-8
+  clip_grad_norm: null
+  max_steps: 100
+  max_bondim_env: 128
+  svd_cutoff: 0.0
+early_stopping: {patience: 10, min_delta: 1.0e-10}

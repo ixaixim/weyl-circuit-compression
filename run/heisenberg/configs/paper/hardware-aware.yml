@@ -1,0 +1,22 @@
+# Hardware-aware parameterized optimization (PO, fSim gates), XXZ Heisenberg model.
+# Paper settings: N = 50. Run once per data point with --reps; see README for per-point deviations.
+# H = sum_i [Jx (X_i X_{i+1} + Y_i Y_{i+1}) + Jz Z_i Z_{i+1} + hx X_i]   (paper notation: J = Jx, J_z = Jz, h = hx)
+model: heisenberg
+method: hardware-aware
+n_sites: 50
+t: 0.25
+hamiltonian: {Jx: 1.0, Jy: 1.0, Jz: -0.5, hx: 0.75, hy: 0.0, hz: 0.0}
+# Fourth-order Suzuki-Trotter reference, compressed to the smallest bond dimension within err_threshold.
+reference: {reps: 10, order: 4, max_bond_dim: 128, compress: true, err_threshold: 1.0e-10}
+ansatz: {reps: 7, order: 2}   # second-order Trotter initialization; override with --reps
+optimizer:
+  lr_1q: 1.0e-6   # single-qubit gates (Riemannian Adam)
+  lr_2q: 1.0e-5   # native two-qubit gate angles (Adam)
+  betas: [0.9, 0.999]
+  eps: 1.0e-8
+  clip_grad_norm: null
+  max_steps: 1500
+  max_bondim_env: 128
+  svd_cutoff: 0.0
+scheduler: {factor: 0.5, patience: 5, min_lr: 1.0e-6, min_delta: 1.0e-9}
+early_stopping: {patience: 15, min_delta: 1.0e-10}

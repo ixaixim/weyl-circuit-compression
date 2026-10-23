@@ -1,0 +1,20 @@
+# Riemannian optimization (RO), XXZ Heisenberg model.
+# Quick example: N = 10, a few minutes on a CPU.
+# H = sum_i [Jx (X_i X_{i+1} + Y_i Y_{i+1}) + Jz Z_i Z_{i+1} + hx X_i]   (paper notation: J = Jx, J_z = Jz, h = hx)
+model: heisenberg
+method: riemannian
+n_sites: 10
+t: 0.25
+hamiltonian: {Jx: 1.0, Jy: 1.0, Jz: -0.5, hx: 0.75, hy: 0.0, hz: 0.0}
+# Fourth-order Suzuki-Trotter reference, compressed to the smallest bond dimension within err_threshold.
+reference: {reps: 10, order: 4, max_bond_dim: 128, compress: true, err_threshold: 1.0e-10}
+ansatz: {reps: 3, order: 2}   # second-order Trotter initialization; override with --reps
+optimizer:
+  lr: 1.0e-4
+  betas: [0.9, 0.999]
+  eps: 1.0e-8
+  clip_grad_norm: null
+  max_steps: 100
+  max_bondim_env: 128
+  svd_cutoff: 0.0
+early_stopping: {patience: 10, min_delta: 1.0e-12}
