@@ -1,7 +1,8 @@
 # weyl-circuit-compression
 
 Repository accompanying the paper "Exploiting the Weyl-Chamber Structure for Hardware-Aware Quantum
-Circuit Compression" by Neel Misciasci, Isabel Nha Minh Le, and Christian B. Mendl.
+Circuit Compression" by Neel Misciasci, Isabel Nha Minh Le, and Christian B. Mendl,
+[arXiv:2610.32812](https://arxiv.org/abs/2610.32812).
 
 Trotterized time-evolution circuits for 1D spin chains are compressed by optimizing them against a
 reference propagator stored as a matrix product operator (MPO). Gradients with respect to each gate
